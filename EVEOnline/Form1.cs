@@ -1,4 +1,6 @@
-using EVEOnline.Services;
+//using EVEOnline.Services;
+using EVEOnline.Logic.ServicesAPI.Interfaces;
+using EVEOnline.Logic.ServicesAPI;
 using EVEOnline.Data.Models;
 using System;
 using Azure;
@@ -6,16 +8,20 @@ using EVEOnline.Logic.Models;
 using EVEOnline.Logic.Services;
 using System.Drawing;
 using Microsoft.EntityFrameworkCore;
+//using EVEOnline.Services;
+//using EVEOnline.Services;
 
 namespace EVEOnline
 {
     public partial class Form1 : Form
     {
-        //private IUniverse universe;
+        //private readonly IUniverse _universe;
         //private readonly IRegionService _regionService;
-        public IRegionService _regionService;
-        //public IEnumerable<UniverseRegion> regionList = null;
+
         MyEveonlineDbContext DbContext_dbContext = new MyEveonlineDbContext();
+        HttpClient httpClient = new HttpClient();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -25,7 +31,9 @@ namespace EVEOnline
         {
             listBox1.Items.Add("Начинаем загрузку Регионов");
             int[] regionList = null;
-            regionList = await Universe.GetUniverse("regions");
+
+            IUniverse universe = new Universe(httpClient);
+            regionList = await universe.GetUniverseAsync("regions");
 
 
             if (regionList != null)
@@ -53,7 +61,7 @@ namespace EVEOnline
                     }
                     else
                     {
-                        var region = await Universe.GetRegion(regionList[i], "ru");
+                        var region = await universe.GetRegionAsync(regionList[i], "ru");
                         Uregion newRegion = new Uregion();
                         newRegion.Id = regionList[i];
                         newRegion.Name = region.name;
@@ -80,7 +88,9 @@ namespace EVEOnline
         private async void button2_Click(object sender, EventArgs e)
         {
             listBox1.Items.Add("Начинаем загрузку Созвездий");
-            var constellationsList = await Universe.GetUniverse("constellations");
+            IUniverse universe = new Universe(httpClient);
+
+            var constellationsList = await universe.GetUniverseAsync("constellations");
 
 
             if (constellationsList != null)
@@ -93,7 +103,7 @@ namespace EVEOnline
 
                 for (int i = 0; i < constellationsList.Length; i++)
                 {
-                    var constellations = await Universe.GetConstellation(constellationsList[i], "ru");
+                    var constellations = await universe.GetConstellationAsync(constellationsList[i], "ru");
                     listBox1.Items.Add(constellationsList[i].ToString() + " " 
                         + constellations.name + " [Регион:" + constellations.region_id + "] --- Ok");
 
@@ -111,7 +121,8 @@ namespace EVEOnline
         private async void button3_Click(object sender, EventArgs e)
         {
             listBox1.Items.Add("Начинаем загрузку Солнечных систем");
-            var systemsList = await Universe.GetUniverse("systems");
+            IUniverse universe = new Universe(httpClient);
+            var systemsList = await universe.GetUniverseAsync("systems");
 
 
             if (systemsList != null)
@@ -124,7 +135,7 @@ namespace EVEOnline
 
                 for (int i = 0; i < systemsList.Length; i++)
                 {
-                    var systems = await Universe.GetSystem(systemsList[i], "ru");
+                    var systems = await universe.GetSystemAsync(systemsList[i], "ru");
                     listBox1.Items.Add(systemsList[i].ToString() + " "
                         + systems.name + " [Созвездие:" + systems.constellation_id + "] --- Ok");
 
