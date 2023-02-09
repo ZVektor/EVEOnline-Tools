@@ -1,4 +1,4 @@
-﻿using EVEOnline.Logic.Models;
+﻿using EVEOnline.Logic.ModelsAPI;
 
 namespace EVEOnline.Logic.ServicesAPI.Interfaces
 {

@@ -9,11 +9,11 @@ public partial class Uconstellation
 
     public string Name { get; set; } = null!;
 
-    public long PositionX { get; set; }
+    public decimal PositionX { get; set; }
 
-    public long PositionY { get; set; }
+    public decimal PositionY { get; set; }
 
-    public long PositionZ { get; set; }
+    public decimal PositionZ { get; set; }
 
     public int RegionId { get; set; }
 

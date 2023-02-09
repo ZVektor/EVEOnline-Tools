@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EVEOnline.Logic.Models;
+namespace EVEOnline.Logic.ModelsAPI;
 
 public partial class URegion
 {

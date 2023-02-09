@@ -1,6 +1,6 @@
 ﻿namespace EVEOnline
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -42,7 +42,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameRuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.universeRegionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -106,6 +105,7 @@
             this.progressBar3.Location = new System.Drawing.Point(11, 138);
             this.progressBar3.Name = "progressBar3";
             this.progressBar3.Size = new System.Drawing.Size(278, 9);
+            this.progressBar3.Step = 1;
             this.progressBar3.TabIndex = 6;
             // 
             // progressBar2
@@ -113,6 +113,7 @@
             this.progressBar2.Location = new System.Drawing.Point(11, 99);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(278, 9);
+            this.progressBar2.Step = 1;
             this.progressBar2.TabIndex = 5;
             // 
             // progressBar1
@@ -120,6 +121,7 @@
             this.progressBar1.Location = new System.Drawing.Point(11, 61);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(278, 9);
+            this.progressBar1.Step = 1;
             this.progressBar1.TabIndex = 4;
             // 
             // button3
@@ -159,7 +161,6 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
-            this.nameRuDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.universeRegionBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(3, 208);
@@ -180,12 +181,6 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             // 
-            // nameRuDataGridViewTextBoxColumn
-            // 
-            this.nameRuDataGridViewTextBoxColumn.DataPropertyName = "NameRu";
-            this.nameRuDataGridViewTextBoxColumn.HeaderText = "NameRu";
-            this.nameRuDataGridViewTextBoxColumn.Name = "nameRuDataGridViewTextBoxColumn";
-            // 
             // descriptionDataGridViewTextBoxColumn
             // 
             this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
@@ -205,7 +200,7 @@
             this.listBox1.Size = new System.Drawing.Size(400, 199);
             this.listBox1.TabIndex = 0;
             // 
-            // Form1
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -214,7 +209,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

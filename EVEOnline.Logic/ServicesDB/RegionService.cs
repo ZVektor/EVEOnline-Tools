@@ -1,13 +1,8 @@
 ﻿using EVEOnline.Data.Models;
-using EVEOnline.Logic.Models;
+using EVEOnline.Logic.ServicesDB.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EVEOnline.Logic.Services
+namespace EVEOnline.Logic.ServicesDB
 {
     public class RegionService : IRegionService
     {

@@ -1,4 +1,4 @@
-﻿using EVEOnline.Logic.Models;
+﻿using EVEOnline.Logic.ModelsAPI;
 using EVEOnline.Logic.ServicesAPI.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,12 @@ namespace EVEOnline.Logic.ServicesAPI
 
         private static readonly string _datasource = "?datasource=tranquility";
 
+        //TODO Сделать обработчик на прерывание и ошибки соединения
+        /// <summary>
+        /// Получает значения методов Universe
+        /// </summary>
+        /// <param name="argUniverse">Методы Universe</param>
+        /// <returns>Массив чисел - int[]</returns>
         public async Task<int[]> GetUniverseAsync(string argUniverse)
         {
             try
@@ -44,24 +50,43 @@ namespace EVEOnline.Logic.ServicesAPI
         /// <summary>
         /// Получить информацию РЕГИОНА
         /// </summary>
-        /// <param name="id">Id Региона</param>
+        /// <param name="id">Id РЕГИОНА</param>
         /// <param name="language">На каком языке</param>
-        /// <returns></returns>
+        /// <returns>Модель РЕГИОНА</returns>
         public async Task<URegion> GetRegionAsync(int id, string? language)
         {
             string fullHost = _hostRegions + id.ToString() + "/" + _datasource + "&language=" + language;
             var response = await _httpClient.GetFromJsonAsync<URegion>(fullHost);
             return response;
-
             //throw new NotImplementedException();
         }
-        public Task<UConstellation> GetConstellationAsync(int id, string? language)
+
+        /// <summary>
+        /// Получить информацию СОЗВЕЗДИЯ
+        /// </summary>
+        /// <param name="id">Id СОЗВЕЗДИЯ</param>
+        /// <param name="language">На каком языке</param>
+        /// <returns>Модель СОЗВЕЗДИЯ</returns>
+        public async Task<UConstellation> GetConstellationAsync(int id, string? language)
         {
-            throw new NotImplementedException();
+            string fullHost = _hostConstellations + id.ToString() + "/" + _datasource + "&language=" + language;
+            var response = await _httpClient.GetFromJsonAsync<UConstellation>(fullHost);
+            return response;
+            //throw new NotImplementedException();
         }
-        public Task<USystem> GetSystemAsync(int id, string? language)
+
+        /// <summary>
+        /// Получить информацию СОЛНЕЧНОЙ СИСТЕМЫ
+        /// </summary>
+        /// <param name="id">Id СОЛНЕЧНОЙ СИСТЕМЫ</param>
+        /// <param name="language">На каком языке</param>
+        /// <returns>Модель СОЛНЕЧНОЙ СИСТЕМЫ</returns>
+        public async Task<USystem> GetSystemAsync(int id, string? language)
         {
-            throw new NotImplementedException();
+            string fullHost = _hostSystems + id.ToString() + "/" + _datasource + "&language=" + language;
+            var response = await _httpClient.GetFromJsonAsync<USystem>(fullHost);
+            return response;
+            //throw new NotImplementedException();
         }
     }
 }

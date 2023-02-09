@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EVEOnline.Logic.Models
+namespace EVEOnline.Logic.ModelsAPI
 {
     public class Planets
     {

@@ -29,22 +29,25 @@ public partial class MyEveonlineDbContext : DbContext
     {
         modelBuilder.Entity<Uconstellation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UConstel__3214EC077A8E17BC");
+            entity.HasKey(e => e.Id).HasName("PK__UConstel__3214EC07F58035E0");
 
             entity.ToTable("UConstellation");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name).HasMaxLength(35);
+            entity.Property(e => e.PositionX).HasColumnType("decimal(22, 1)");
+            entity.Property(e => e.PositionY).HasColumnType("decimal(22, 1)");
+            entity.Property(e => e.PositionZ).HasColumnType("decimal(22, 1)");
 
             entity.HasOne(d => d.Region).WithMany(p => p.Uconstellations)
                 .HasForeignKey(d => d.RegionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UConstell__Regio__440B1D61");
+                .HasConstraintName("FK__UConstell__Regio__5EBF139D");
         });
 
         modelBuilder.Entity<Uregion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__URegions__3214EC0797C6DCC9");
+            entity.HasKey(e => e.Id).HasName("PK__URegions__3214EC0722D51ABA");
 
             entity.ToTable("URegions");
 
@@ -54,19 +57,22 @@ public partial class MyEveonlineDbContext : DbContext
 
         modelBuilder.Entity<Usystem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__USystem__3214EC0731DB8D35");
+            entity.HasKey(e => e.Id).HasName("PK__USystem__3214EC07C25AB893");
 
             entity.ToTable("USystem");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name).HasMaxLength(35);
+            entity.Property(e => e.PositionX).HasColumnType("decimal(22, 1)");
+            entity.Property(e => e.PositionY).HasColumnType("decimal(22, 1)");
+            entity.Property(e => e.PositionZ).HasColumnType("decimal(22, 1)");
             entity.Property(e => e.SecurityClass).HasMaxLength(3);
             entity.Property(e => e.SecurityStatus).HasColumnType("decimal(20, 17)");
 
             entity.HasOne(d => d.Constellation).WithMany(p => p.Usystems)
                 .HasForeignKey(d => d.ConstellationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__USystem__Constel__46E78A0C");
+                .HasConstraintName("FK__USystem__Constel__619B8048");
         });
 
         OnModelCreatingPartial(modelBuilder);

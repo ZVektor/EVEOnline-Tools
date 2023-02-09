@@ -1,10 +1,10 @@
-﻿namespace EVEOnline.Logic.Models
+﻿namespace EVEOnline.Logic.ModelsAPI
 {
     public class Position
     {
-        public double x { get; set; }
-        public double y { get; set; }
-        public double z { get; set; }
+        public decimal x { get; set; }
+        public decimal y { get; set; }
+        public decimal z { get; set; }
     }
 
 
