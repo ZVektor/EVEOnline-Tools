@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVEOnline", "EVEOnline\EVEOnline.csproj", "{2D8983FD-548A-439D-A064-27B46CF681FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{87E25094-D6B4-4053-A5E1-10BBD581CAF0} = {87E25094-D6B4-4053-A5E1-10BBD581CAF0}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVEOnline.Data", "EVEOnline.Data\EVEOnline.Data.csproj", "{87E25094-D6B4-4053-A5E1-10BBD581CAF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EVEOnline.Logic", "EVEOnline.Logic\EVEOnline.Logic.csproj", "{B90DB16F-9EE6-48BC-9345-A8F974D8A8A8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{87E25094-D6B4-4053-A5E1-10BBD581CAF0} = {87E25094-D6B4-4053-A5E1-10BBD581CAF0}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D8983FD-548A-439D-A064-27B46CF681FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8983FD-548A-439D-A064-27B46CF681FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8983FD-548A-439D-A064-27B46CF681FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8983FD-548A-439D-A064-27B46CF681FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87E25094-D6B4-4053-A5E1-10BBD581CAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E25094-D6B4-4053-A5E1-10BBD581CAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E25094-D6B4-4053-A5E1-10BBD581CAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E25094-D6B4-4053-A5E1-10BBD581CAF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B90DB16F-9EE6-48BC-9345-A8F974D8A8A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B90DB16F-9EE6-48BC-9345-A8F974D8A8A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B90DB16F-9EE6-48BC-9345-A8F974D8A8A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B90DB16F-9EE6-48BC-9345-A8F974D8A8A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {711C10E0-D561-4666-88A7-D16BB00A1E0E}
+	EndGlobalSection
+EndGlobal
