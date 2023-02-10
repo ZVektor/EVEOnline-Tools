@@ -3,172 +3,158 @@ using EVEOnline.Logic.ServicesAPI;
 using EVEOnline.Data.Models;
 using EVEOnline.Logic.ServicesDB;
 using EVEOnline.Logic.ServicesDB.Interfaces;
+using static EVEOnline.MultiColoredModernUI;
+using System.Runtime.InteropServices;
 
 namespace EVEOnline
 {
     public partial class FormMain : Form
     {
-        //private readonly IUniverse _universe;
-        //private readonly IRegionService _regionService;
-
-        MyEveonlineDbContext DbContext_dbContext = new MyEveonlineDbContext();
-        HttpClient httpClient = new HttpClient();
-
+        //Fields
+        private Button currentButton;
+        private Random random;
+        private int tempIndex;
+        private Form activeForm;
 
         public FormMain()
         {
             InitializeComponent();
+            random= new Random();
+            btnCloseChildForm.Visible = false; 
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+        }
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+
+
+        #region Дизайнерский UI
+        //Methods
+        private Color SelectThemeColor()
+        {
+            int index = random.Next(ThemeColor.ColorList.Count);
+            while (tempIndex == index)
+            {
+                index = random.Next(ThemeColor.ColorList.Count);
+            }
+            tempIndex = index;
+            string color = ThemeColor.ColorList[index];
+            return ColorTranslator.FromHtml(color);
         }
 
-        private async void btnAddRegion_Click(object sender, EventArgs e)
+        private void ActivateButton(object btnSender)
         {
-            listBox1.Items.Add("Начинаем загрузку Регионов");
-            IUniverse universe = new Universe(httpClient);//Надо как то переделать чтоб не вызывать каждый раз!
-            int[] regionList = await universe.GetUniverseAsync("regions");
-
-            if (regionList != null)
+            if (btnSender != null)
             {
-                var regionCount = regionList.Length;
-                progressBar1.Maximum = regionCount; //Максимальное значение
-                listBox1.Items.Add("Найдено регионов: " + regionCount.ToString());
-
-                for (int i = 0; i < regionCount; i++)
+                if (currentButton != (Button)btnSender)
                 {
-                    IRegionService regionService = new RegionService(DbContext_dbContext); //Надо как то переделать чтоб не вызывать каждый раз!
-                    Uregion data = await regionService.GetRegion(regionList[i]);
-
-                    if (data != null)
-                    {
-                        listBox1.Items.Add("Регион: " + regionList[i].ToString() + " [" + data.Id + ":" + data.Name + "] --- Есть в базе");
-                    }
-                    else
-                    {
-                        var region = await universe.GetRegionAsync(regionList[i], "ru");
-                        Uregion newRegion = new Uregion();
-                        newRegion.Id = regionList[i];
-                        newRegion.Name = region.name;
-                        newRegion.Description = region.description;
-                        var postRegion = await regionService.PostRegion(newRegion);
-                        if (postRegion != null)
-                            listBox1.Items.Add("Регион: [" + regionList[i] + ":" + region.name + "] --- Добавлен в базу!");
-                        else
-                            listBox1.Items.Add("Регион: [" + regionList[i] + ":" + region.name + "] --- Не могу добавить в базу !!!");
-                    }
-                    progressBar1.PerformStep(); //вызываем этот метод для увеличения шкалы progressBar
+                    DisableButton();
+                    Color color = SelectThemeColor();
+                    currentButton = (Button)btnSender;
+                    currentButton.BackColor = color;
+                    currentButton.ForeColor = Color.White;
+                    currentButton.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    panelTitleBar.BackColor = color; 
+                    panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                    ThemeColor.PrimaryColor = color;
+                    ThemeColor.SecondaryColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                    btnCloseChildForm.Visible = true;
                 }
-                listBox1.Items.Add("Все регионы загружены в базу" + regionCount.ToString());
-            }
-            else
-            {
-                listBox1.Items.Add("Нет регионов");
             }
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private void DisableButton()
         {
-            listBox1.Items.Add("Начинаем загрузку Созвездий");
-            IUniverse universe = new Universe(httpClient);
-            var constellationsList = await universe.GetUniverseAsync("constellations");
-
-            if (constellationsList != null)
+            foreach (Control previousBtn in panelMenu.Controls)
             {
-                var constellationsCount = constellationsList.Length;
-                progressBar2.Maximum = constellationsCount; //по умолчанию
-                listBox1.Items.Add("Найдено СОЗВЕЗДИЙ: " + constellationsCount.ToString());
-
-                for (int i = 0; i < constellationsCount; i++)
+                if (previousBtn.GetType() == typeof(Button))
                 {
-                    IConstellationService constellationService = new СonstellationService(DbContext_dbContext); //Надо как то переделать чтоб не вызывать каждый раз!
-                    Uconstellation data = await constellationService.GetConstellation(constellationsList[i]);
-
-
-                    if (data != null)
-                    {
-                        listBox1.Items.Add("СОЗВЕЗДИЕ: " + constellationsList[i].ToString() + " [" + data.Id + ":" + data.Name + "] --- Есть в базе");
-                    }
-                    else
-                    {
-                        var constellation = await universe.GetConstellationAsync(constellationsList[i], "ru");
-                        Uconstellation newConstellation = new Uconstellation();
-                        newConstellation.Id = constellationsList[i];
-                        newConstellation.Name = constellation.name;
-                        newConstellation.PositionX = constellation.position.x;
-                        newConstellation.PositionY = constellation.position.y;
-                        newConstellation.PositionZ = constellation.position.z;
-                        //newConstellation.PositionZ = (long)constellation.position.z;
-                        newConstellation.RegionId = constellation.region_id;
-
-                        var postConstellation = await constellationService.PostConstellation(newConstellation);
-                        if (postConstellation != null)
-                            listBox1.Items.Add("СОЗВЕЗДИЕ: [" + constellationsList[i] + ":" + constellation.name + "] --- Добавлен в базу!");
-                        else
-                            listBox1.Items.Add("СОЗВЕЗДИЕ: [" + constellationsList[i] + ":" + constellation.name + "] --- Не могу добавить в базу !!!");
-                    }
-
-
-
-
-                    progressBar2.PerformStep(); //вызываем этот метод для увеличения шкалы progressBar
+                    previousBtn.BackColor = Color.FromArgb(40, 45, 62);
+                    previousBtn.ForeColor = Color.Gainsboro;
+                    previousBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 }
-                listBox1.Items.Add("СОЗВЕЗДИЯ загружены" + constellationsCount.ToString());
             }
-            else
-            {
-                listBox1.Items.Add("Нет СОЗВЕЗДИЙ");
-            }
-
         }
-        private async void button3_Click(object sender, EventArgs e)
+
+        private void OpenChildForm(Form childForm, object btnSender)
         {
-            listBox1.Items.Add("Начинаем загрузку СОЛНЕЧНЫХ СИСТЕМ");
-            IUniverse universe = new Universe(httpClient);
-            var systemsList = await universe.GetUniverseAsync("systems");
+            if (activeForm != null)
+                activeForm.Close();
+            ActivateButton(btnSender);
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            this.panelDesktopPane.Controls.Add(childForm);
+            this.panelDesktopPane.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+            lblTitle.Text = childForm.Text;
+        }
+        #endregion
 
-            if (systemsList != null)
-            {
-                var systemsCount = systemsList.Length;
-                progressBar3.Maximum = systemsCount; //по умолчанию
-                listBox1.Items.Add("Найдено СОЛНЕЧНЫХ СИСТЕМ: " + systemsCount.ToString());
+        private void btnDashBoard_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormDashBoard(), sender);
+        }
 
-                for (int i = 0; i < systemsCount; i++)
-                {
-                    ISystemService systemService = new SystemService(DbContext_dbContext); //Надо как то переделать чтоб не вызывать каждый раз!
-                    Usystem data = await systemService.GetSystem(systemsList[i]);
+        private void btnTrade_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormTrade(), sender);
+        }
+
+        private void btnLoadData_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormLoadData(), sender);
+        }
+
+        #region Рабочие функции
 
 
-                    if (data != null)
-                    {
-                        listBox1.Items.Add("СОЛНЕЧНАЯ СИСТЕМА: " + systemsList[i].ToString() + " [" + data.Id + ":" + data.Name + "] --- Есть в базе");
-                    }
-                    else
-                    {
-                        var system = await universe.GetSystemAsync(systemsList[i], "ru");
-                        Usystem newSystem = new Usystem();
-                        newSystem.Id = systemsList[i];
-                        newSystem.Name = system.name;
-                        newSystem.PositionX = system.position.x;
-                        newSystem.PositionY = system.position.y;
-                        newSystem.PositionZ = system.position.z;
-                        newSystem.SecurityClass = system.security_class;
-                        newSystem.SecurityStatus = system.security_status;
-                        newSystem.StarId = system.star_id;
-                        newSystem.ConstellationId = system.constellation_id;
+        #endregion
 
-                        var postSystem = await systemService.PostSystem(newSystem);
-                        if (postSystem != null)
-                            listBox1.Items.Add("СОЗВЕЗДИЕ: [" + systemsList[i] + ":" + system.name + "] --- Добавлен в базу!");
-                        else
-                            listBox1.Items.Add("СОЗВЕЗДИЕ: [" + systemsList[i] + ":" + system.name + "] --- Не могу добавить в базу !!!");
-                    }
-                    progressBar3.PerformStep();
-                }
-                listBox1.Items.Add("Созвездия загружены" + systemsCount.ToString());
-            }
+        private void btnCloseChildForm_Click(object sender, EventArgs e)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            Reset();
+        }
+        private void Reset()
+        {
+            DisableButton();
+            lblTitle.Text = "HOME";
+            panelTitleBar.BackColor = Color.FromArgb(40, 45, 62);
+            panelLogo.BackColor = Color.FromArgb(26, 30, 41);
+            currentButton = null;
+            btnCloseChildForm.Visible = false;
+        }
+
+        private void panelTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMaximize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+                this.WindowState = FormWindowState.Maximized;
             else
-            {
-                listBox1.Items.Add("Нет созвездий");
-            }
+                this.WindowState = FormWindowState.Normal;
+        }
 
+        private void bntMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

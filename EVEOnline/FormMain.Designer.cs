@@ -29,219 +29,291 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnAddRegion = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.universeRegionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.btnLoadData = new System.Windows.Forms.Button();
+            this.btnTrade = new System.Windows.Forms.Button();
+            this.btnDashBoard = new System.Windows.Forms.Button();
+            this.panelLogo = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.bntMinimize = new System.Windows.Forms.Button();
+            this.btnMaximize = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnCloseChildForm = new System.Windows.Forms.Button();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.panelDesktopPane = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.universeRegionBindingSource)).BeginInit();
+            this.panelMenu.SuspendLayout();
+            this.panelLogo.SuspendLayout();
+            this.panelTitleBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(936, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // файлToolStripMenuItem
-            // 
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.файлToolStripMenuItem.Text = "Файл";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 496);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(936, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Location = new System.Drawing.Point(12, 27);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.progressBar3);
-            this.splitContainer1.Panel1.Controls.Add(this.progressBar2);
-            this.splitContainer1.Panel1.Controls.Add(this.progressBar1);
-            this.splitContainer1.Panel1.Controls.Add(this.button3);
-            this.splitContainer1.Panel1.Controls.Add(this.button2);
-            this.splitContainer1.Panel1.Controls.Add(this.btnAddRegion);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Panel2.Controls.Add(this.listBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(912, 456);
-            this.splitContainer1.SplitterDistance = 325;
-            this.splitContainer1.TabIndex = 2;
-            // 
-            // progressBar3
-            // 
-            this.progressBar3.Location = new System.Drawing.Point(11, 138);
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(278, 9);
-            this.progressBar3.Step = 1;
-            this.progressBar3.TabIndex = 6;
-            // 
-            // progressBar2
-            // 
-            this.progressBar2.Location = new System.Drawing.Point(11, 99);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(278, 9);
-            this.progressBar2.Step = 1;
-            this.progressBar2.TabIndex = 5;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(11, 61);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(278, 9);
-            this.progressBar1.Step = 1;
-            this.progressBar1.TabIndex = 4;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(11, 115);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(278, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Загрузить СИСТЕМЫ";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(11, 76);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(278, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Загрузить СОЗВЕЗДИЯ\r\n";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btnAddRegion
-            // 
-            this.btnAddRegion.Location = new System.Drawing.Point(11, 38);
-            this.btnAddRegion.Name = "btnAddRegion";
-            this.btnAddRegion.Size = new System.Drawing.Size(278, 23);
-            this.btnAddRegion.TabIndex = 1;
-            this.btnAddRegion.Text = "Загрузить РЕГИОНЫ";
-            this.btnAddRegion.UseVisualStyleBackColor = true;
-            this.btnAddRegion.Click += new System.EventHandler(this.btnAddRegion_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.descriptionDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.universeRegionBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 208);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(443, 150);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
             // 
             // universeRegionBindingSource
             // 
             this.universeRegionBindingSource.DataSource = typeof(EVEOnline.Data.Models.Uregion);
             // 
-            // listBox1
+            // panelMenu
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(3, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(400, 199);
-            this.listBox1.TabIndex = 0;
+            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(45)))), ((int)(((byte)(62)))));
+            this.panelMenu.Controls.Add(this.button7);
+            this.panelMenu.Controls.Add(this.button6);
+            this.panelMenu.Controls.Add(this.button5);
+            this.panelMenu.Controls.Add(this.btnLoadData);
+            this.panelMenu.Controls.Add(this.btnTrade);
+            this.panelMenu.Controls.Add(this.btnDashBoard);
+            this.panelMenu.Controls.Add(this.panelLogo);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(200, 600);
+            this.panelMenu.TabIndex = 3;
+            // 
+            // button7
+            // 
+            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button7.Location = new System.Drawing.Point(0, 270);
+            this.button7.Name = "button7";
+            this.button7.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button7.Size = new System.Drawing.Size(200, 40);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "DASHBOARD";
+            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button6.Location = new System.Drawing.Point(0, 230);
+            this.button6.Name = "button6";
+            this.button6.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button6.Size = new System.Drawing.Size(200, 40);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "DASHBOARD";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button5.Location = new System.Drawing.Point(0, 190);
+            this.button5.Name = "button5";
+            this.button5.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button5.Size = new System.Drawing.Size(200, 40);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "DASHBOARD";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // btnLoadData
+            // 
+            this.btnLoadData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLoadData.FlatAppearance.BorderSize = 0;
+            this.btnLoadData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadData.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnLoadData.Location = new System.Drawing.Point(0, 150);
+            this.btnLoadData.Name = "btnLoadData";
+            this.btnLoadData.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnLoadData.Size = new System.Drawing.Size(200, 40);
+            this.btnLoadData.TabIndex = 3;
+            this.btnLoadData.Text = "ЗАГРУЗКА ДАННЫХ";
+            this.btnLoadData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoadData.UseVisualStyleBackColor = true;
+            this.btnLoadData.Click += new System.EventHandler(this.btnLoadData_Click);
+            // 
+            // btnTrade
+            // 
+            this.btnTrade.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTrade.FlatAppearance.BorderSize = 0;
+            this.btnTrade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrade.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnTrade.Location = new System.Drawing.Point(0, 110);
+            this.btnTrade.Name = "btnTrade";
+            this.btnTrade.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnTrade.Size = new System.Drawing.Size(200, 40);
+            this.btnTrade.TabIndex = 2;
+            this.btnTrade.Text = "ТОРГОВЛЯ";
+            this.btnTrade.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTrade.UseVisualStyleBackColor = true;
+            this.btnTrade.Click += new System.EventHandler(this.btnTrade_Click);
+            // 
+            // btnDashBoard
+            // 
+            this.btnDashBoard.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDashBoard.FlatAppearance.BorderSize = 0;
+            this.btnDashBoard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDashBoard.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnDashBoard.Location = new System.Drawing.Point(0, 70);
+            this.btnDashBoard.Name = "btnDashBoard";
+            this.btnDashBoard.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnDashBoard.Size = new System.Drawing.Size(200, 40);
+            this.btnDashBoard.TabIndex = 1;
+            this.btnDashBoard.Text = "DASHBOARD";
+            this.btnDashBoard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDashBoard.UseVisualStyleBackColor = true;
+            this.btnDashBoard.Click += new System.EventHandler(this.btnDashBoard_Click);
+            // 
+            // panelLogo
+            // 
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(30)))), ((int)(((byte)(41)))));
+            this.panelLogo.Controls.Add(this.label1);
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(200, 70);
+            this.panelLogo.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.label1.Location = new System.Drawing.Point(13, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(174, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "EVE Online Tools";
+            // 
+            // panelTitleBar
+            // 
+            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(45)))), ((int)(((byte)(62)))));
+            this.panelTitleBar.Controls.Add(this.bntMinimize);
+            this.panelTitleBar.Controls.Add(this.btnMaximize);
+            this.panelTitleBar.Controls.Add(this.btnClose);
+            this.panelTitleBar.Controls.Add(this.btnCloseChildForm);
+            this.panelTitleBar.Controls.Add(this.lblTitle);
+            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitleBar.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panelTitleBar.Location = new System.Drawing.Point(200, 0);
+            this.panelTitleBar.Name = "panelTitleBar";
+            this.panelTitleBar.Size = new System.Drawing.Size(600, 70);
+            this.panelTitleBar.TabIndex = 4;
+            this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            // 
+            // bntMinimize
+            // 
+            this.bntMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bntMinimize.FlatAppearance.BorderSize = 0;
+            this.bntMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bntMinimize.Image = global::EVEOnline.Properties.Resources.icons8_Minimize_24_white;
+            this.bntMinimize.Location = new System.Drawing.Point(527, 3);
+            this.bntMinimize.Name = "bntMinimize";
+            this.bntMinimize.Size = new System.Drawing.Size(24, 24);
+            this.bntMinimize.TabIndex = 4;
+            this.bntMinimize.UseVisualStyleBackColor = true;
+            this.bntMinimize.Click += new System.EventHandler(this.bntMinimize_Click);
+            // 
+            // btnMaximize
+            // 
+            this.btnMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaximize.FlatAppearance.BorderSize = 0;
+            this.btnMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaximize.Image = global::EVEOnline.Properties.Resources.icons8_maximize_24_white;
+            this.btnMaximize.Location = new System.Drawing.Point(549, 3);
+            this.btnMaximize.Name = "btnMaximize";
+            this.btnMaximize.Size = new System.Drawing.Size(24, 24);
+            this.btnMaximize.TabIndex = 3;
+            this.btnMaximize.UseVisualStyleBackColor = true;
+            this.btnMaximize.Click += new System.EventHandler(this.btnMaximize_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Image = global::EVEOnline.Properties.Resources.icons8_close_24_red;
+            this.btnClose.Location = new System.Drawing.Point(571, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(24, 24);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnCloseChildForm
+            // 
+            this.btnCloseChildForm.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCloseChildForm.FlatAppearance.BorderSize = 0;
+            this.btnCloseChildForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseChildForm.Image = global::EVEOnline.Properties.Resources.icons8_close_50_white;
+            this.btnCloseChildForm.Location = new System.Drawing.Point(0, 0);
+            this.btnCloseChildForm.Name = "btnCloseChildForm";
+            this.btnCloseChildForm.Size = new System.Drawing.Size(75, 70);
+            this.btnCloseChildForm.TabIndex = 1;
+            this.btnCloseChildForm.UseVisualStyleBackColor = true;
+            this.btnCloseChildForm.Click += new System.EventHandler(this.btnCloseChildForm_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.Location = new System.Drawing.Point(81, 20);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(77, 30);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "HOME";
+            // 
+            // panelDesktopPane
+            // 
+            this.panelDesktopPane.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesktopPane.Location = new System.Drawing.Point(200, 70);
+            this.panelDesktopPane.Name = "panelDesktopPane";
+            this.panelDesktopPane.Size = new System.Drawing.Size(600, 530);
+            this.panelDesktopPane.TabIndex = 5;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 518);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(30)))), ((int)(((byte)(41)))));
+            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.panelDesktopPane);
+            this.Controls.Add(this.panelTitleBar);
+            this.Controls.Add(this.panelMenu);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "FormMain";
-            this.Text = "Form1";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "EVE Online Tools";
             ((System.ComponentModel.ISupportInitialize)(this.universeRegionBindingSource)).EndInit();
+            this.panelMenu.ResumeLayout(false);
+            this.panelLogo.ResumeLayout(false);
+            this.panelLogo.PerformLayout();
+            this.panelTitleBar.ResumeLayout(false);
+            this.panelTitleBar.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem файлToolStripMenuItem;
-        private StatusStrip statusStrip1;
-        private SplitContainer splitContainer1;
-        private Button btnAddRegion;
-        private ListBox listBox1;
-        private Button button2;
-        private Button button3;
-        private ProgressBar progressBar1;
-        private ProgressBar progressBar3;
-        private ProgressBar progressBar2;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameRuDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private BindingSource universeRegionBindingSource;
+        private Panel panelMenu;
+        private Button btnDashBoard;
+        private Panel panelLogo;
+        private Button button7;
+        private Button button6;
+        private Button button5;
+        private Button btnLoadData;
+        private Button btnTrade;
+        private Panel panelTitleBar;
+        private Label lblTitle;
+        private Label label1;
+        private Panel panelDesktopPane;
+        private Button btnCloseChildForm;
+        private Button btnClose;
+        private Button bntMinimize;
+        private Button btnMaximize;
     }
 }
