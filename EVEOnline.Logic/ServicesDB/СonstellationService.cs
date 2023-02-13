@@ -13,11 +13,11 @@ namespace EVEOnline.Logic.ServicesDB
     {
         private readonly MyEveonlineDbContext _db;
         public СonstellationService(MyEveonlineDbContext db) => _db = db;
-        public async Task<Uconstellation> GetConstellation(int id)
+        public async Task<TbUniverseConstellation> GetConstellation(int id)
         {
             if (id > 0)
             {
-                var response = await _db.Uconstellations.FirstOrDefaultAsync(x => x.Id == id);
+                var response = await _db.TbUniverseConstellations.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (response == null)
                 {
@@ -32,14 +32,14 @@ namespace EVEOnline.Logic.ServicesDB
             //throw new NotImplementedException();
         }
 
-        public async Task<int> PostConstellation(Uconstellation newConstellation)
+        public async Task<int> PostConstellation(TbUniverseConstellation newConstellation)
         {
             _db.Add(newConstellation);
             await _db.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
-            var regionId = newConstellation.Id;
+            var constellationId = newConstellation.Id;
 
-            return regionId;
+            return constellationId;
             //throw new NotImplementedException();
         }
     }

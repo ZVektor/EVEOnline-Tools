@@ -1,0 +1,68 @@
+CREATE TABLE URegions (
+Id INT PRIMARY KEY NOT NULL,
+Name NVARCHAR(35),
+Description NVARCHAR(max),
+DescriptionRu NVARCHAR(max),
+);
+
+CREATE TABLE UConstellation (
+Id INT PRIMARY KEY NOT NULL,
+Name NVARCHAR(35) NOT NULL,
+PositionX DECIMAL(22,1) NOT NULL,
+PositionY DECIMAL(22,1) NOT NULL,
+PositionZ DECIMAL(22,1) NOT NULL,
+RegionId INT NOT NULL,
+FOREIGN KEY (RegionId) REFERENCES URegions (Id)
+);
+
+CREATE TABLE USystem (
+Id INT PRIMARY KEY NOT NULL,
+Name NVARCHAR(35) NOT NULL,
+PositionX DECIMAL(22,1) NOT NULL,
+PositionY DECIMAL(22,1) NOT NULL,
+PositionZ DECIMAL(22,1) NOT NULL,
+SecurityClass NVARCHAR(3),
+SecurityStatus DECIMAL(20,17) NOT NULL,
+StarId INT,
+ConstellationId INT NOT NULL,
+FOREIGN KEY (ConstellationId) REFERENCES UConstellation (Id)
+);
+
+CREATE TABLE tbTradeOrder (
+Id BIGINT PRIMARY KEY NOT NULL,
+Duration INT NOT NULL,
+IsBuyOrder BIT NOT NULL,
+Issued DATETIME NOT NULL,
+LocationId BIGINT NOT NULL,
+MinVolume INT NOT NULL,
+Price DECIMAL(22,2) NOT NULL,
+Range NVARCHAR(20),NOT NULL,
+SystemId INT NOT NULL,
+TypeId INT NOT NUL,
+VolumeRemain INT NOT NUL,
+VolumeTotal INT NOT NUL,
+FOREIGN KEY (LocationId) REFERENCES tbUniverseStation (Id)
+FOREIGN KEY (SystemId) REFERENCES USystem (Id)
+FOREIGN KEY (TypeId) REFERENCES UConstellation (Id)
+);
+
+
+CREATE TABLE tbUniverseStation (
+Id INT PRIMARY KEY NOT NULL,
+Name NVARCHAR(35) NOT NULL,
+MaxDockableShipVolume INT NOT NULL,
+OfficeRentalCost INT NOT NULL,
+Owner INT,
+PositionX DECIMAL(22,1) NOT NULL,
+PositionY DECIMAL(22,1) NOT NULL,
+PositionZ DECIMAL(22,1) NOT NULL,
+RaceId INT,
+ReprocessingEfficiency DECIMAL(5,4)
+ReprocessingStationsTake DECIMAL(5,4)
+Services NVARCHAR(400) NOT NULL,
+SystemId INT NOT NULL,
+TypeId INT NOT NUL,
+FOREIGN KEY (RaceId) REFERENCES tbUniverseStation (Id)
+FOREIGN KEY (SystemId) REFERENCES USystem (Id)
+FOREIGN KEY (TypeId) REFERENCES UConstellation (Id)
+);

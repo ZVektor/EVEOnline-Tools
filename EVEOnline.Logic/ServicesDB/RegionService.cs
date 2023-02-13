@@ -8,12 +8,17 @@ namespace EVEOnline.Logic.ServicesDB
     {
         private readonly MyEveonlineDbContext _db;
         public RegionService(MyEveonlineDbContext db) => _db = db;
-        public async Task<Uregion> GetRegion(int id)
+
+        public async Task<List<TbUniverseRegion>> GetRegions()
+        {
+        return await _db.TbUniverseRegions.ToListAsync();
+        }
+        public async Task<TbUniverseRegion> GetRegion(int id)
         {
             if (id > 0)
             {
                 //var response = await _db.UniverseRegions.FirstOrDefaultAsync(x => x.Id == id);
-                var response = await _db.Uregions.FirstOrDefaultAsync(x => x.Id == id);
+                var response = await _db.TbUniverseRegions.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (response == null)
                 {
@@ -26,9 +31,7 @@ namespace EVEOnline.Logic.ServicesDB
                 return null; 
             }
         }
-
-
-        public async Task<int> PostRegion(Uregion newRegion)
+        public async Task<int> PostRegion(TbUniverseRegion newRegion)
         {
             _db.Add(newRegion);
             await _db.SaveChangesAsync();

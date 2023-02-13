@@ -5,9 +5,9 @@ namespace EVEOnline.Logic.ServicesDB.Interfaces
 {
     public interface IRegionService
     {
-        //public Task<IEnumerable<UniverseRegion>> GetRegions();
-        public Task<Uregion> GetRegion(int id);
-        public Task<int> PostRegion(Uregion newRegion);
+        public Task<List<TbUniverseRegion>> GetRegions();
+        public Task<TbUniverseRegion> GetRegion(int id);
+        public Task<int> PostRegion(TbUniverseRegion newRegion);
 
         //public Task<bool> UpdateRegion(int id, Uregion updateRegion);
 

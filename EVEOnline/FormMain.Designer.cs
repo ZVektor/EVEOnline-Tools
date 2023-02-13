@@ -54,7 +54,7 @@
             // 
             // universeRegionBindingSource
             // 
-            this.universeRegionBindingSource.DataSource = typeof(EVEOnline.Data.Models.Uregion);
+            this.universeRegionBindingSource.DataSource = typeof(EVEOnline.Data.Models.TbUniverseSystem);
             // 
             // panelMenu
             // 

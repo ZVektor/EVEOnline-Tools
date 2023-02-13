@@ -9,11 +9,11 @@ namespace EVEOnline.Logic.ServicesDB.Interfaces
 {
     public interface IConstellationService
     {
-        //public Task<IEnumerable<Uconstellation>> GetConstellations();
-        public Task<Uconstellation> GetConstellation(int id);
-        public Task<int> PostConstellation(Uconstellation newConstellation);
+        //public Task<IEnumerable<TbUniverseConstellation>> GetConstellations();
+        public Task<TbUniverseConstellation> GetConstellation(int id);
+        public Task<int> PostConstellation(TbUniverseConstellation newConstellation);
 
-        //public Task<bool> UpdateConstellation(int id, Uconstellation updateConstellation);
+        //public Task<bool> UpdateConstellation(int id, TbUniverseConstellation updateConstellation);
 
         //public Task<bool> DeleteConstellation(int id);
     }

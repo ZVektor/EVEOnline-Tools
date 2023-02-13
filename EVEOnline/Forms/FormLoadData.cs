@@ -2,18 +2,13 @@
 using EVEOnline.Logic.ServicesAPI;
 using EVEOnline.Logic.ServicesDB.Interfaces;
 using EVEOnline.Logic.ServicesDB;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using EVEOnline.Data.Models;
 using static EVEOnline.MultiColoredModernUI;
+using EVEOnline.Logic.ModelsAPI;
+using Microsoft.EntityFrameworkCore;
+using System.Windows.Forms;
+using System.Drawing;
+using System;
 
 namespace EVEOnline.Forms
 {
@@ -65,7 +60,7 @@ namespace EVEOnline.Forms
                 for (int i = 0; i < regionCount; i++)
                 {
                     IRegionService regionService = new RegionService(DbContext_dbContext); //Надо как то переделать чтоб не вызывать каждый раз!
-                    Uregion data = await regionService.GetRegion(regionList[i]);
+                    TbUniverseRegion data = await regionService.GetRegion(regionList[i]);
 
                     if (data != null)
                     {
@@ -74,7 +69,7 @@ namespace EVEOnline.Forms
                     else
                     {
                         var region = await universe.GetRegionAsync(regionList[i], "ru");
-                        Uregion newRegion = new Uregion();
+                        TbUniverseRegion newRegion = new TbUniverseRegion();
                         newRegion.Id = regionList[i];
                         newRegion.Name = region.name;
                         newRegion.Description = region.description;
@@ -109,7 +104,7 @@ namespace EVEOnline.Forms
                 for (int i = 0; i < constellationsCount; i++)
                 {
                     IConstellationService constellationService = new СonstellationService(DbContext_dbContext); //Надо как то переделать чтоб не вызывать каждый раз!
-                    Uconstellation data = await constellationService.GetConstellation(constellationsList[i]);
+                    TbUniverseConstellation data = await constellationService.GetConstellation(constellationsList[i]);
 
 
                     if (data != null)
@@ -119,7 +114,7 @@ namespace EVEOnline.Forms
                     else
                     {
                         var constellation = await universe.GetConstellationAsync(constellationsList[i], "ru");
-                        Uconstellation newConstellation = new Uconstellation();
+                        TbUniverseConstellation newConstellation = new TbUniverseConstellation();
                         newConstellation.Id = constellationsList[i];
                         newConstellation.Name = constellation.name;
                         newConstellation.PositionX = constellation.position.x;
@@ -163,7 +158,7 @@ namespace EVEOnline.Forms
                 for (int i = 0; i < systemsCount; i++)
                 {
                     ISystemService systemService = new SystemService(DbContext_dbContext); //Надо как то переделать чтоб не вызывать каждый раз!
-                    Usystem data = await systemService.GetSystem(systemsList[i]);
+                    TbUniverseSystem data = await systemService.GetSystem(systemsList[i]);
 
 
                     if (data != null)
@@ -173,7 +168,7 @@ namespace EVEOnline.Forms
                     else
                     {
                         var system = await universe.GetSystemAsync(systemsList[i], "ru");
-                        Usystem newSystem = new Usystem();
+                        TbUniverseSystem newSystem = new TbUniverseSystem();
                         newSystem.Id = systemsList[i];
                         newSystem.Name = system.name;
                         newSystem.PositionX = system.position.x;
@@ -198,6 +193,164 @@ namespace EVEOnline.Forms
             {
                 listBox1.Items.Add("Нет созвездий");
             }
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1 == null) return;
+            else
+            {
+                listBox1.Items.Add("Проверяем есть ли ТИП в базе");
+                var typsId = Convert.ToInt32(textBox1.Text);
+                IUniverseTypeServiceDB universeTypeServiceDB = new UniverseTypeServiceDB(DbContext_dbContext); //Надо как то переделать чтоб не вызывать каждый раз!
+                var data = await universeTypeServiceDB.GetUniverseType(typsId);
+                if (data != null)
+                {
+                    listBox1.Items.Add("В базе есть этот ТИП");
+                }
+                else
+                {
+
+                    listBox1.Items.Add("Загружаем ТИП [" + typsId + "] по средствам API");
+
+                    IUniverse universe = new Universe(httpClient);
+                    var getUniverseType = await universe.GetUniverseTypeAsync(typsId, "en", true);
+                    if (getUniverseType != null)
+                    {
+                        listBox1.Items.Add("ТИП [" + getUniverseType.type_id + "-" + getUniverseType.name + "] --- Загружен");
+                        var postdata = await universeTypeServiceDB.GetUniverseType(typsId);
+                        if (postdata != null)
+                            listBox1.Items.Add("ТИП [" + getUniverseType.type_id + "-" + getUniverseType.name + "] --- Добавлен в базу!");
+                        else
+                            listBox1.Items.Add("ТИП [" + getUniverseType.type_id + "-" + getUniverseType.name + "] --- Не могу добавить в базу !!!");
+                    }
+                    else
+                        listBox1.Items.Add("ТИП [" + typsId + "] --- Нет на сервере !!!");
+
+                }
+
+            }
+
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            MarketOrderServiseAPI marketOrders = new MarketOrderServiseAPI(httpClient);//Надо как то переделать чтоб не создавать каждый раз!
+            IUniverseTypeBSServiceDB universeTypeBSServiceDB = new UniverseTypeBSServiceDB(DbContext_dbContext);
+            IUniverse universeTypeBSModelAPI = new Universe(httpClient);
+            if (textBox1 == null) return;
+            else
+            {
+                var regionId = Convert.ToInt32(textBox2.Text);
+                listBox1.Items.Add("Начинаем загрузку ОРДЕРОВ");
+                bool arrLoop = true;
+                int arrI = 1;
+
+                while (arrLoop)
+                {
+                    //MarketOrderServiseAPI marketOrders = new MarketOrderServiseAPI(httpClient);//Надо как то переделать чтоб не создавать каждый раз!
+                    var orderList = await marketOrders.GetOrders(regionId, arrI);
+                    if (orderList != null)
+                    {
+                        int orderListCount = orderList.Count;
+                        listBox1.ForeColor = Color.Red;
+                        listBox1.Items.Add("СТРАНИЦА №: - " + arrI + " - Найдено ОРДЕРОВ: - " + orderListCount);
+                        listBox1.ForeColor = Color.Black;
+                        for (int i = 0; i < orderListCount; i++)
+                        {
+
+                            var market_order_type_id = orderList[i].type_id;
+
+                            //IUniverseTypeBSServiceDB universeTypeBSServiceDB = new UniverseTypeBSServiceDB(DbContext_dbContext);
+                            TbUniverseTypeB dataUniverseTypeBS = await universeTypeBSServiceDB.GetUniverseTypeBS(market_order_type_id);
+
+                            if (dataUniverseTypeBS != null)
+                            {
+                                //listBox1.Items.Add("ТИП [" + dataUniverseTypeBS.Id + " - " + dataUniverseTypeBS.Name + "] --- Есть в базе");
+                            }
+                            else
+                            {
+                                //listBox1.Items.Add("ТИП [" + market_order_type_id + "] --- НЕТ в базе! --- ДОБАВЛЯЕМ");
+                                //IUniverse universeTypeBSModelAPI = new Universe(httpClient);
+                                UniverseTypeModel getUniverseTypeAPI = await universeTypeBSModelAPI.GetUniverseTypeBSAsync(market_order_type_id, "en", true);
+                                if (getUniverseTypeAPI != null)
+                                    listBox1.Items.Add("ТИП [" + getUniverseTypeAPI.type_id + " - " + getUniverseTypeAPI.name + "] --- Добавлен в базу!");
+                                else
+                                    listBox1.Items.Add("ТИП [" + market_order_type_id + "]--- Не могу добавить в базу!");
+
+                            }
+
+
+
+
+                        }
+                        arrI++;
+                    }
+                    else
+                    {
+                        arrLoop = false;
+                        listBox1.Items.Add("Обработано СТРАНИЦ: - " + Convert.ToString(arrI - 1));
+                    }
+                }
+            }
+
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            MarketOrderServiseAPI marketOrders = new MarketOrderServiseAPI(httpClient);//Надо как то переделать чтоб не создавать каждый раз!
+            IUniverseTypeBSServiceDB universeTypeBSServiceDB = new UniverseTypeBSServiceDB(DbContext_dbContext);
+            IUniverse universeTypeBSModelAPI = new Universe(httpClient);
+            var regionId = Convert.ToInt32(textBox2.Text);
+
+            var getUniverseTypes = await universeTypeBSServiceDB.GetUniverseTypesBS();
+            int getUniverseTypesCont = getUniverseTypes.Count;
+            progressBar4.Maximum = getUniverseTypesCont;
+            for (int i = 0; i < getUniverseTypesCont; i++)
+            {
+                var currentTypeId = getUniverseTypes[i].Id;
+                var orderList = await marketOrders.GetOrders(regionId, 1, currentTypeId);
+                if (orderList != null)
+                {
+                    //listBox1.Items.Add("ТИП: [" + getUniverseTypes[i].Id + " - " + getUniverseTypes[i].Name + "] Найдено ОРДЕРОВ --- " + orderList.Count);
+
+                    decimal tempOrderListSellPrice = 0;
+                    decimal tempOrderListBuyPrice = 0;
+
+                    var orderListSell = orderList.Where(s => s.is_buy_order == false).OrderBy(s => s.price).FirstOrDefault();
+                    if (orderListSell != null)
+                    {
+                        tempOrderListSellPrice = orderListSell.price * orderListSell.volume_remain;
+
+                    }
+
+                    var orderListBuy = orderList.Where(s => s.is_buy_order == true).OrderByDescending(s => s.price).FirstOrDefault();
+                    if (orderListBuy != null)
+                    {
+                        tempOrderListBuyPrice = orderListBuy.price * orderListBuy.volume_remain;
+                    }
+
+                    decimal orderListMorja = 0;
+                    if ((orderListSell != null) && (orderListBuy != null))
+                    {
+                        orderListMorja = (orderListBuy.price / orderListSell.price) - 1;
+                    }
+                    if ((double)orderListMorja > 0.1) 
+                    {
+                        listBox1.Items.Add("ТИП: [" + getUniverseTypes[i].Id + " - " + getUniverseTypes[i].Name + "] Найдено ОРДЕРОВ --- " + orderList.Count);
+                        listBox1.Items.Add("MIN Цена продажи  --- " + orderListSell.price + " На общую сумму: " + tempOrderListSellPrice);
+                        listBox1.Items.Add("MAX Цена покупки  --- " + orderListBuy.price + " На общую сумму: " + tempOrderListBuyPrice);
+                        listBox1.Items.Add("МОРЖА СОСТАВЛЯЕТ: " + orderListMorja);
+                        listBox1.Items.Add("");
+                    }
+                }
+                else
+                {
+                    listBox1.Items.Add("ТИП: [" + getUniverseTypes[i].Id + " - " + getUniverseTypes[i].Name + "] Не найдено ОРДЕРОВ");
+                }
+                progressBar4.PerformStep();
+            }
+            listBox1.Items.Add("ЗАКОНЧИЛИ!!!");
         }
     }
 }

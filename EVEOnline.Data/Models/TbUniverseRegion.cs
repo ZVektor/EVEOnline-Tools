@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EVEOnline.Data.Models;
 
-public partial class Uregion
+public partial class TbUniverseRegion
 {
     public int Id { get; set; }
 
@@ -13,5 +13,5 @@ public partial class Uregion
 
     public string? DescriptionRu { get; set; }
 
-    public virtual ICollection<Uconstellation> Uconstellations { get; } = new List<Uconstellation>();
+    public virtual ICollection<TbUniverseConstellation> TbUniverseConstellations { get; } = new List<TbUniverseConstellation>();
 }

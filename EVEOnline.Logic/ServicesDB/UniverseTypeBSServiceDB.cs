@@ -9,16 +9,20 @@ using System.Threading.Tasks;
 
 namespace EVEOnline.Logic.ServicesDB
 {
-    public class SystemService : ISystemService
+    public class UniverseTypeBSServiceDB : IUniverseTypeBSServiceDB
     {
         private readonly MyEveonlineDbContext _db;
-        public SystemService(MyEveonlineDbContext db) => _db = db;
-        public async Task<TbUniverseSystem> GetSystem(int id)
+        public UniverseTypeBSServiceDB(MyEveonlineDbContext db) => _db = db;
+
+        public async Task<List<TbUniverseTypeB>> GetUniverseTypesBS()
+        {
+            return await _db.TbUniverseTypeBs.ToListAsync();
+        }
+        public async Task<TbUniverseTypeB> GetUniverseTypeBS(int id)
         {
             if (id > 0)
             {
-                var response = await _db.TbUniverseSystems.FirstOrDefaultAsync(x => x.Id == id);
-
+                var response = await _db.TbUniverseTypeBs.FirstOrDefaultAsync(x => x.Id == id);
                 if (response == null)
                 {
                     return null;
@@ -29,18 +33,14 @@ namespace EVEOnline.Logic.ServicesDB
             {
                 return null;
             }
-            //throw new NotImplementedException();
         }
-
-        public async Task<int> PostSystem(TbUniverseSystem newSystem)
+        public async Task<int> PostUniverseTypeBS(TbUniverseTypeB newUniverseTypeBS)
         {
-            _db.Add(newSystem);
+            _db.Add(newUniverseTypeBS);
             await _db.SaveChangesAsync();
-            //return RedirectToAction(nameof(Index));
-            var regionId = newSystem.Id;
+            var universeTypeId = newUniverseTypeBS.Id;
 
-            return regionId;
-            //throw new NotImplementedException();
+            return universeTypeId;
         }
     }
 }

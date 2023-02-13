@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EVEOnline.Data.Models;
 
-public partial class Usystem
+public partial class TbUniverseConstellation
 {
     public int Id { get; set; }
 
@@ -15,13 +15,9 @@ public partial class Usystem
 
     public decimal PositionZ { get; set; }
 
-    public string? SecurityClass { get; set; }
+    public int RegionId { get; set; }
 
-    public decimal SecurityStatus { get; set; }
+    public virtual TbUniverseRegion Region { get; set; } = null!;
 
-    public int? StarId { get; set; }
-
-    public int ConstellationId { get; set; }
-
-    public virtual Uconstellation Constellation { get; set; } = null!;
+    public virtual ICollection<TbUniverseSystem> TbUniverseSystems { get; } = new List<TbUniverseSystem>();
 }
